@@ -2,6 +2,14 @@
 
 require 'functions.php';
 
+// jika tidak ada id di url
+if(!isset($_GET['id'])) {
+    header("Location: index.php");
+    exit;
+}
+
+// Ambil id dari url
+
 $id = $_GET['id'];
 
 // Query Mahasiswa berdasarkan id
@@ -21,6 +29,8 @@ if(isset($_POST['ubah'])) {
         </script>";
     }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,10 +38,10 @@ if(isset($_POST['ubah'])) {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Ubah Data Buku</title>
+    <title> Ubah Data Mahasiswa</title>
 </head>
 <body>
-    <h3>Form Ubah Data Buku</h3>
+    <h3>Form Ubah Data Mahasiswa</h3>
     <form action="" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $bk['id']; ?>">
         <ul>
@@ -48,12 +58,12 @@ if(isset($_POST['ubah'])) {
             </label>
             </li>
             <li>
-            <input type="hidden" name="gambar_lama" value="<?= $mhs['gambar']; ?>">
+            <input type="hidden" name="gambar_lama" value="<?= $bk['gambar']; ?>">
             <label>
                 Gambar :
                 <input type="file" name="gambar" class="gambar" onchange="previewImage()" >
             </label>
-            <img src="img/<?= $mhs['gambar']; ?>" width="120" style="display: block;" class="img-preview">
+            <img src="img/<?= $bk['gambar']; ?>" width="120" style="display: block;" class="img-preview">
             </li>
             <li>
             <label>
@@ -68,6 +78,6 @@ if(isset($_POST['ubah'])) {
         </ul>
     
     </form>
-    <script src="script.js"></script>
+    <script src="js/script.js"></script>
 </body>
 </html>
