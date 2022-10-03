@@ -45,11 +45,9 @@ if (isset($_POST['cari'])) {
             <br><br>
           </form> 
           
-
+          
         <div class="container">
-        <a class="btn btn-primary position-relative" href="tambah.php">Tambah  Buku</a>
-          
-          
+          <a class="btn btn-primary position-relative" href="tambah.php">Tambah  Buku</a>
             <table class="table table-striped table-hover" align="center" cellspacing="0" cellpadding="10">
                 <thead>
                 <tr>
