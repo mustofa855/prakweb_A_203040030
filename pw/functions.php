@@ -115,8 +115,8 @@ function hapus($id)
   $conn = koneksi();
 
   // menghapus gambar di folder img 
-  $b = query("SELECT * FROM buku WHERE id = $id");
-  if ($b['gambar'] != 'nons.png') {
+  $bk = query("SELECT * FROM buku WHERE id = $id");
+  if ($bk['gambar'] != 'nons.png') {
     unlink('img' . $b['gambar']);
   }
 

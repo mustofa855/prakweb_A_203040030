@@ -2,11 +2,7 @@
 
 require 'functions.php';
 
-// jika tidak ada id di url
-if(!isset($_GET['id'])) {
-    header("Location: index.php");
-    exit;
-}
+
 
 // Ambil id dari url
 
@@ -25,7 +21,7 @@ if(isset($_POST['ubah'])) {
     }else{
         echo "<script>
             alert('Data Gagal Diubah!');
-            document.location.href = 'index.php';
+            document.location.href = 'ubah.php';
         </script>";
     }
 }
