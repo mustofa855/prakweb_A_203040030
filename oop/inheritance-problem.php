@@ -10,8 +10,7 @@ class Produk
          $waktuMain,
          $tipe;
 
-  public function __construct($judul = "judul", $penulis = "penulis", $penerbit="penerbit", $harga=0
-                              $jmlHalaman = 0,$waktuMain = 0,$tipe){
+  public function __construct($judul = "judul", $penulis = "penulis", $penerbit="penerbit", $harga=0,$jmlHalaman = 0,$waktuMain = 0,$tipe){
     $this->judul = $judul;
     $this->penulis = $penulis;
     $this->penerbit = $penerbit;
@@ -26,13 +25,18 @@ class Produk
     return "$this->penulis, $this->penerbit";
   }
 
-  public function getInfoLengkap(){
-      
-  // Komik : Naruto | Masashi Kishimoto, Shonen Jump (Rp.30000) - 100 Halaman.
+  public function getInfoLengkap()
+  {
+    // Komik : Naruto | Mashashi Kishimoto, Shonen Jump (Rp. 30000) - 100 Halaman.
+    $str = "{$this->tipe} : {$this->judul} | {$this->getLabel()} (Rp. {$this->harga})";
+    if ($this->tipe == "Komik") {
+      $str .=  " - {$this->jmlHalaman} Halaman.";
+    } else if ($this->tipe == "Game") {
+      $str .= " ~ {$this->waktuMain} Jam.";
+    }
 
-  $str="{$this->tipe} : {$this->judul | {$this->getLabel()} (Rp. {$this->harga}) - {$this->jmlHalaman} Halaman."; 
+    return $str;
   }
-
 }
 
 class CetakInfoProduk{
@@ -48,5 +52,7 @@ $produk2 = new Produk("Uncharted", "Neil Druckman", "Sony Computer", 250000,0,50
 
 
 
-// Komik : Naruto | Masashi Kishimoto, Shonen Jump (Rp.30000) - 100 Halaman.
-// Game : Uncharted | Neil Druckman, Sony Computer (Rp.250000) - 50 jam
+
+echo $produk1->getInfoLengkap();
+echo "<br>";
+echo $produk2->getInfoLengkap();
