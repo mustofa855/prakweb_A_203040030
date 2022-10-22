@@ -1,79 +1,79 @@
-<?php 
+<?php
 
 require 'functions.php';
 
-
-
-// Ambil id dari url
-
-$id = $_GET['id'];
-
-// Query Mahasiswa berdasarkan id
-$bk = query("SELECT * FROM buku WHERE id = $id");
-
-// cek apakah tombol ubah sudah ditekan
-if(isset($_POST['ubah'])) {
-    if(ubah($_POST) > 0) {
-        echo "<script>
-            alert('Data Berhasil Diubah!');
-            document.location.href = 'index.php';
-        </script>";
-    }else{
-        echo "<script>
-            alert('Data Gagal Diubah!');
-            document.location.href = 'ubah.php';
-        </script>";
-    }
+// jika tidak ada id di url
+if (!isset($_GET['id'])) {
+  header("Location: index.php");
+  exit;
 }
 
+// ambil id dari url
+$id = $_GET['id'];
+
+// query mahasiswa berdasarkan id
+$m = query("SELECT * FROM buku WHERE id = $id");
+
+// cek apakah tombol ubah sudah ditekan
+if (isset($_POST['ubah'])) {
+  if (ubah($_POST) > 0) {
+    echo "<script>
+            alert('data berhasil diubah');
+            document.location.href = 'index.php';
+         </script>";
+  } else {
+    echo "data gagal diubah!";
+  }
+}
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Ubah Data Mahasiswa</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <title>Ubah Data Buku</title>
 </head>
+
 <body>
-    <h3>Form Ubah Data Mahasiswa</h3>
-    <form action="" method="post" enctype="multipart/form-data">
-        <input type="hidden" name="id" value="<?= $bk['id']; ?>">
-        <ul>
-            <li>
-            <label>
-                Judul Buku :
-                <input type="text" name="judul_buku" autofocus required value="<?= $bk['judul_buku']; ?>">
-            </label>
-            </li>
-            <li>
-            <label>
-                Penulis :
-                <input type="text" name="penulis" required value="<?= $bk['penulis']; ?>">
-            </label>
-            </li>
-            <li>
-            <input type="hidden" name="gambar_lama" value="<?= $bk['gambar']; ?>">
-            <label>
-                Gambar :
-                <input type="file" name="gambar" class="gambar" onchange="previewImage()" >
-            </label>
-            <img src="img/<?= $bk['gambar']; ?>" width="120" style="display: block;" class="img-preview">
-            </li>
-            <li>
-            <label>
-                Harga :
-                <input type="text" name="harga" required value="<?= $bk['harga']; ?>">
-            </label>
-            </li>
-            <li>
-            <button type="submit" name="ubah">Ubah Data!</button>
-            </li>
-        
-        </ul>
-    
-    </form>
-    <script src="js/script.js"></script>
+  <h3 align="center">Form Ubah Data Buku</h3>
+  <br>
+  <form action="" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="<?= $m['id']; ?>">
+
+
+    <div class="container">
+      <div class="form-row">
+        <div class="col">
+          <input type="text" name="judul_buku" class="form-control" placeholder="Judul Buku" autofocus required value="<?= $m['judul_buku']; ?>">
+        </div>
+        <br>
+        <div class="col">
+          <input type="text" name="penulis" class="form-control" placeholder="penulis" required value="<?= $m['penulis']; ?>">
+        </div>
+        <br>
+        <div class="col">
+          <input type="text" name="harga" class="form-control" placeholder="harga" required value="<?= $m['harga']; ?>">
+        </div>
+      </div>
+
+      <div class="card" style="width:12rem;">
+        <input type="hidden" name="gambar_lama" value="<?= $m['gambar']; ?>">
+        <img src="img/<?= $m['gambar']; ?>" style="display: block;" class="img-preview" class="card-img" alt="...">
+        <div class="card-body">
+          <input type="file" name="gambar" class="gambar" onchange="previewImage()">
+        </div>
+      </div>
+      <div class="d-flex flex-row-reverse">
+        <input class="btn btn-dark float-right" type="submit" value="Ubah" name="ubah">
+      </div>
+
+  </form>
+
+  <script src="script.js"></script>
+
 </body>
+
 </html>
